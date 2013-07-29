@@ -17,6 +17,7 @@
 		4599A61D17A70B0300B39A33 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4599A61C17A70B0300B39A33 /* Default@2x.png */; };
 		4599A61F17A70B0300B39A33 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4599A61E17A70B0300B39A33 /* Default-568h@2x.png */; };
 		4599A62617A70B4C00B39A33 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4599A62517A70B4C00B39A33 /* MainStoryboard.storyboard */; };
+		4599A62917A70DE100B39A33 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4599A62817A70DE100B39A33 /* TableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,8 @@
 		4599A61C17A70B0300B39A33 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		4599A61E17A70B0300B39A33 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		4599A62517A70B4C00B39A33 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
+		4599A62717A70DE100B39A33 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TableViewController.h; path = ../TableViewController.h; sourceTree = "<group>"; };
+		4599A62817A70DE100B39A33 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TableViewController.m; path = ../TableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +83,8 @@
 		4599A60E17A70B0300B39A33 /* BlogReaderTwo */ = {
 			isa = PBXGroup;
 			children = (
+				4599A62717A70DE100B39A33 /* TableViewController.h */,
+				4599A62817A70DE100B39A33 /* TableViewController.m */,
 				4599A61717A70B0300B39A33 /* AppDelegate.h */,
 				4599A61817A70B0300B39A33 /* AppDelegate.m */,
 				4599A60F17A70B0300B39A33 /* Supporting Files */,
@@ -170,6 +175,7 @@
 			files = (
 				4599A61517A70B0300B39A33 /* main.m in Sources */,
 				4599A61917A70B0300B39A33 /* AppDelegate.m in Sources */,
+				4599A62917A70DE100B39A33 /* TableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
