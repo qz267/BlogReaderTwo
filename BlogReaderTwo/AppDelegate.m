@@ -1,9 +1,9 @@
 //
 //  AppDelegate.m
-//  BlogReaderTwo
+//  BlogReader
 //
-//  Created by Zheng Qin on 7/29/13.
-//  Copyright (c) 2013 Zheng Qin. All rights reserved.
+//  Created by Amit Bijlani on 12/6/12.
+//  Copyright (c) 2012 Amit Bijlani. All rights reserved.
 //
 
 #import "AppDelegate.h"
@@ -12,10 +12,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-//    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-//    // Override point for customization after application launch.
-//    self.window.backgroundColor = [UIColor whiteColor];
-//    [self.window makeKeyAndVisible];
     return YES;
 }
 

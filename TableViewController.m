@@ -1,12 +1,13 @@
 //
 //  TableViewController.m
-//  BlogReaderTwo
+//  BlogReader
 //
-//  Created by Zheng Qin on 7/29/13.
-//  Copyright (c) 2013 Zheng Qin. All rights reserved.
+//  Created by Amit Bijlani on 12/6/12.
+//  Copyright (c) 2012 Amit Bijlani. All rights reserved.
 //
 
 #import "TableViewController.h"
+#import "BlogPost.h"
 
 @interface TableViewController ()
 
@@ -17,7 +18,6 @@
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
-    
     if (self) {
         // Custom initialization
     }
@@ -28,28 +28,27 @@
 {
     [super viewDidLoad];
     
-//    set blog url
     NSURL *blogURL = [NSURL URLWithString:@"http://blog.teamtreehouse.com/api/get_recent_summary/"];
     
-//    take json data
     NSData *jsonData = [NSData dataWithContentsOfURL:blogURL];
     
-    NSError *jsonerror = nil;
+    NSError *error = nil;
     
-    NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&jsonerror];
+    NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
+    NSLog(@"%@",dataDictionary);
     
-//    NSLog(@"%@", jsonData);
-//    
-//    NSDictionary *blogPost1 = [NSDictionary dictionaryWithObjectsAndKeys:@"The Missing Widget in Android",@"title",@"Ben Jakuben",@"author", nil];
-//    NSDictionary *blogPost2 = [NSDictionary dictionaryWithObjectsAndKeys:@"book 2",@"title",@"author 2",@"author", nil];
-//    
-    self.blogPosts = [dataDictionary objectForKey:@"posts"];
+    self.blogPosts = [NSMutableArray array];
+    
+    NSArray *blogPostsArray = [dataDictionary objectForKey:@"posts"];
+    
+    for (NSDictionary *blogPostDictionary in blogPostsArray) {
+        BlogPost *bp = [BlogPost blogPostWithTitle:[blogPostDictionary objectForKey:@"title"]];
+        bp.author = [blogPostDictionary objectForKey:@"author"];
+        [self.blogPosts addObject:bp];
+    }
+    
+    
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning
@@ -62,16 +61,14 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-//#warning Potentially incomplete method implementation.
     // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return self.blogPosts.count;
+    return [self.blogPosts count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -79,10 +76,10 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    NSDictionary *blogPost = [self.blogPosts objectAtIndex:indexPath.row];
-    // Configure the cell...
-    cell.textLabel.text = [blogPost valueForKey:@"title"];
-    cell.detailTextLabel.text = [blogPost valueForKey:@"author"];
+    BlogPost *blogPost = [self.blogPosts objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = blogPost.title;
+    cell.detailTextLabel.text = blogPost.author;
     return cell;
 }
 
