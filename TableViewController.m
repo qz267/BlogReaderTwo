@@ -17,6 +17,7 @@
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
+    
     if (self) {
         // Custom initialization
     }
@@ -27,9 +28,22 @@
 {
     [super viewDidLoad];
     
-    self.titles = [NSArray arrayWithObjects:@"Line 1",
-                   @"Line 2",
-                   nil];
+//    set blog url
+    NSURL *blogURL = [NSURL URLWithString:@"http://blog.teamtreehouse.com/api/get_recent_summary/"];
+    
+//    take json data
+    NSData *jsonData = [NSData dataWithContentsOfURL:blogURL];
+    
+    NSError *jsonerror = nil;
+    
+    NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&jsonerror];
+    
+//    NSLog(@"%@", jsonData);
+//    
+//    NSDictionary *blogPost1 = [NSDictionary dictionaryWithObjectsAndKeys:@"The Missing Widget in Android",@"title",@"Ben Jakuben",@"author", nil];
+//    NSDictionary *blogPost2 = [NSDictionary dictionaryWithObjectsAndKeys:@"book 2",@"title",@"author 2",@"author", nil];
+//    
+    self.blogPosts = [dataDictionary objectForKey:@"posts"];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -57,7 +71,7 @@
 {
 //#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return self.titles.count;
+    return self.blogPosts.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -65,9 +79,10 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
+    NSDictionary *blogPost = [self.blogPosts objectAtIndex:indexPath.row];
     // Configure the cell...
-    cell.textLabel.text = [self.titles objectAtIndex:indexPath.row];
-    
+    cell.textLabel.text = [blogPost valueForKey:@"title"];
+    cell.detailTextLabel.text = [blogPost valueForKey:@"author"];
     return cell;
 }
 
