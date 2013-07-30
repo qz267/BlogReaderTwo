@@ -20,6 +20,7 @@
 		4599A62917A70DE100B39A33 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4599A62817A70DE100B39A33 /* TableViewController.m */; };
 		4599A62C17A7243300B39A33 /* BlogPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 4599A62B17A7243300B39A33 /* BlogPost.m */; };
 		45D0996E17A776B400A94EEC /* tree.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D0996D17A776B400A94EEC /* tree.png */; };
+		45D099A017A7822500A94EEC /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45D0999F17A7822500A94EEC /* WebViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,8 @@
 		4599A62A17A7243300B39A33 /* BlogPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlogPost.h; sourceTree = "<group>"; };
 		4599A62B17A7243300B39A33 /* BlogPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlogPost.m; sourceTree = "<group>"; };
 		45D0996D17A776B400A94EEC /* tree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tree.png; sourceTree = "<group>"; };
+		45D0999E17A7822500A94EEC /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		45D0999F17A7822500A94EEC /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +99,8 @@
 				4599A62517A70B4C00B39A33 /* MainStoryboard.storyboard */,
 				4599A62A17A7243300B39A33 /* BlogPost.h */,
 				4599A62B17A7243300B39A33 /* BlogPost.m */,
+				45D0999E17A7822500A94EEC /* WebViewController.h */,
+				45D0999F17A7822500A94EEC /* WebViewController.m */,
 			);
 			path = BlogReaderTwo;
 			sourceTree = "<group>";
@@ -186,6 +191,7 @@
 				4599A61917A70B0300B39A33 /* AppDelegate.m in Sources */,
 				4599A62917A70DE100B39A33 /* TableViewController.m in Sources */,
 				4599A62C17A7243300B39A33 /* BlogPost.m in Sources */,
+				45D099A017A7822500A94EEC /* WebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,8 +1,7 @@
 //
 //  AppDelegate.m
 //  BlogReader
-
-
+//
 #import "AppDelegate.h"
 
 @implementation AppDelegate

@@ -1,10 +1,11 @@
 //
 //  TableViewController.m
 //  BlogReader
-
+//
 
 #import "TableViewController.h"
 #import "BlogPost.h"
+#import "WebViewController.h"
 
 @interface TableViewController ()
 
@@ -32,22 +33,21 @@
     NSError *error = nil;
     
     NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
-    NSLog(@"%@",dataDictionary);
+//    NSLog(@"%@",dataDictionary);
     
     self.blogPosts = [NSMutableArray array];
     
     NSArray *blogPostsArray = [dataDictionary objectForKey:@"posts"];
     
-    for (NSDictionary *blogPostDictionary in blogPostsArray) {
-        BlogPost *bp = [BlogPost blogPostWithTitle:[blogPostDictionary objectForKey:@"title"]];
-        bp.author = [blogPostDictionary objectForKey:@"author"];
-        bp.thumbnail = [blogPostDictionary objectForKey:@"thumbnail"];
-        bp.date = [blogPostDictionary objectForKey:@"date"];
-        [self.blogPosts addObject:bp];
+    for (NSDictionary *bpDictionary in blogPostsArray) {
+        BlogPost *blogPost = [BlogPost blogPostWithTitle:[bpDictionary objectForKey:@"title"]];
+        blogPost.author = [bpDictionary objectForKey:@"author"];
+        blogPost.thumbnail = [bpDictionary objectForKey:@"thumbnail"];
+        blogPost.date = [bpDictionary objectForKey:@"date"];
+        blogPost.url = [NSURL URLWithString:[bpDictionary objectForKey:@"url"]];
+        [self.blogPosts addObject:blogPost];
     }
     
-    
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -76,72 +76,36 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     BlogPost *blogPost = [self.blogPosts objectAtIndex:indexPath.row];
-    
-    if ([blogPost.thumbnail isKindOfClass:[NSString class]]) {
+
+    if ( [blogPost.thumbnail isKindOfClass:[NSString class]]) {
         NSData *imageData = [NSData dataWithContentsOfURL:blogPost.thumbnailURL];
         UIImage *image = [UIImage imageWithData:imageData];
+        
         cell.imageView.image = image;
-    }else{
-        cell.imageView.image = [UIImage imageNamed:@"tree.png"];
+    } else {
+        cell.imageView.image = [UIImage imageNamed:@"treehouse.png"];
     }
-    
-    
-    
     cell.textLabel.text = blogPost.title;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@", blogPost.author, blogPost.formattedDate];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@",blogPost.author,[blogPost formattedDate]];
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    NSLog(@"preparing for segue: %@",segue.identifier);
+    
+    if ( [segue.identifier isEqualToString:@"showBlogPost"]){
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        BlogPost *blogPost = [self.blogPosts objectAtIndex:indexPath.row];
+        WebViewController *wbc = (WebViewController *)segue.destinationViewController;
+        wbc.blogPostURL = blogPost.url;
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    }
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
-#pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
-}
+
+
 
 @end
