@@ -1,10 +1,7 @@
 //
 //  AppDelegate.m
 //  BlogReader
-//
-//  Created by Amit Bijlani on 12/6/12.
-//  Copyright (c) 2012 Amit Bijlani. All rights reserved.
-//
+
 
 #import "AppDelegate.h"
 

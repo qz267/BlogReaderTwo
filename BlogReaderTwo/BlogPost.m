@@ -2,9 +2,7 @@
 //  BlogPost.m
 //  BlogReader
 //
-//  Created by Amit Bijlani on 2/13/13.
-//  Copyright (c) 2013 Amit Bijlani. All rights reserved.
-//
+
 
 #import "BlogPost.h"
 

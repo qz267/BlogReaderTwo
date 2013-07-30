@@ -1,10 +1,7 @@
 //
 //  TableViewController.m
 //  BlogReader
-//
-//  Created by Amit Bijlani on 12/6/12.
-//  Copyright (c) 2012 Amit Bijlani. All rights reserved.
-//
+
 
 #import "TableViewController.h"
 #import "BlogPost.h"
@@ -79,11 +76,16 @@
     
     BlogPost *blogPost = [self.blogPosts objectAtIndex:indexPath.row];
     
-    NSData *imageData = [NSData dataWithContentsOfURL:blogPost.thumbnailURL];
+    if ([blogPost.thumbnail isKindOfClass:[NSString class]]) {
+        NSData *imageData = [NSData dataWithContentsOfURL:blogPost.thumbnailURL];
+        UIImage *image = [UIImage imageWithData:imageData];
+        cell.imageView.image = image;
+    }else{
+        cell.imageView.image = [UIImage imageNamed:@"tree.png"];
+    }
     
-    UIImage *image = [UIImage imageWithData:imageData];
     
-    cell.imageView.image = image;
+    
     cell.textLabel.text = blogPost.title;
     cell.detailTextLabel.text = blogPost.author;
     return cell;
